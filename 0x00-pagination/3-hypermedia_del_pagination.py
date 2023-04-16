@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Pagination python
 """
-
+Deletion-resilient hypermedia pagination
+"""
 
 import csv
 import math
@@ -15,6 +15,7 @@ class Server:
 
     def __init__(self):
         self.__dataset = None
+        self.__indexed_dataset = None
 
     def dataset(self) -> List[List]:
         """Cached dataset
@@ -27,14 +28,16 @@ class Server:
 
         return self.__dataset
 
-    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """assert to verify that both argumets are intergers greater than 0
+    def indexed_dataset(self) -> Dict[int, List]:
+        """Dataset indexed by sorting position, starting at 0
         """
-        assert isinstance(page, int) and page > 0
-        assert isinstance(page_size, int) and page_size > 0
+        if self.__indexed_dataset is None:
+            dataset = self.dataset()
+            truncated_dataset = dataset[:1000]
+            self.__indexed_dataset = {
+                i: dataset[i] for i in range(len(dataset))
+            }
+        return self.__indexed_dataset
 
-        start_index = (page - 1) * page_size
-        end_index = page * page_size
-
-        dataset = self.dataset()
-        return dataset[start_index:end_index]
+    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+            pass
