@@ -5,7 +5,7 @@
 
 import csv
 import math
-from typing import List
+from typing import List, Dict
 
 
 class Server:
@@ -39,7 +39,7 @@ class Server:
         dataset = self.dataset()
         return dataset[start_index:end_index]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict[int, int]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, int]:
         """Returns
             page_size: the length of the returned dataset page
             page: the current page number
