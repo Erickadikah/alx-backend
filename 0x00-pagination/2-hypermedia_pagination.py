@@ -48,9 +48,6 @@ class Server:
             prev_page: number of the previous page, None if no previous page
             total_pages: the total number of pages in the dataset as an integer
         """
-        assert isinstance(page, int) and page > 0
-        assert isinstance(page_size, int) and page_size > 0
-
         data = self.get_page(page=page, page_size=page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
 
