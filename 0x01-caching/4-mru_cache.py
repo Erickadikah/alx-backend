@@ -28,7 +28,7 @@ class MRUCache(BaseCaching):
         """
         if key and item:
             self.cache_data[key] = item
-        if key not in  self.data:
+        if key not in self.data:
             self.data.append(key)
         else:
             self.data.remove(key)
