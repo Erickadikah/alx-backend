@@ -33,8 +33,5 @@ class FIFOCache(BaseCaching):
 
     def get(self, key):
         if key in self.cache_data:
-            self.item_order.remove(key)
-            self.item_order.append(key)
             return self.cached_data[key]
-        else:
-            return None
+        return None
