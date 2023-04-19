@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""class LRUCache that inherits from 
+"""class LRUCache that inherits from
     BaseCaching and is a caching system:
 """
 from base_caching import BaseCaching
@@ -32,7 +32,7 @@ class LRUCache(BaseCaching):
         self.data.append(key)
 
     def get(self, key):
-        """key is None or if the key doesn’t exist 
+        """key is None or if the key doesn’t exist
             in self.cache_data, return None.
         """
         if key in self.cache_data:
