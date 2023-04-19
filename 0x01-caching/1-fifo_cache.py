@@ -4,6 +4,7 @@
 
 from base_caching import BaseCaching
 
+
 class FIFOCache(BaseCaching):
     """class FIFO
     """
@@ -12,26 +13,44 @@ class FIFOCache(BaseCaching):
         """Calling the super class
         """
         super().__init__()
-        self.item_order = []
+        self.cache_item_order_list = []
 
     def put(self, key, item):
-        """assigns to the dictionary self.cache_data the item value for the key key.
-            If key or item is None, this method should not do anything.
-            If the number of items in self.cache_data is higher that BaseCaching.MAX_ITEMS:
+        """assigns to the dictionary self.cache_data the
+            item value for the key key.
+            If key or item is None, this method should
+            not do anything.
+            If the number of items in self.cache_data is
+            higher that BaseCaching.MAX_ITEMS:
             discard the first item put in cache (FIFO algorithm)
-            prints DISCARD: with the key discarded and following by a new line
-        """
-        if key is None or item is None:
-            return
-        if len(self.cache_data) >= self.MAX_ITEMS:
-            oldest_key = self.item_order.pop(0)
-            del self.cache_data[oldest_key]
-            print("DISCARD: {}".format(oldest_key))
+            prints DISCARD: with the key discarded
+            and following by a new line
 
-        self.cache_data[key] = item
-        self.item_order.append(key)
+             Args:
+            key: Key to be assigned a value
+            value: Value to be assigned to the key
+
+            Returns:
+                None
+        """
+        if key and item:
+            self.cache_data[key] = item
+            self.cache_item_order_list.append(key)
+            if len(self.cache_data) > self.MAX_ITEMS:
+                self.cache_data.pop(self.cache_item_order_list[0])
+                oldest_key = self.cache_item_order_list.pop(0)
+                print("DISCARD: {}".format(oldest_key))
 
     def get(self, key):
+        """Return the value associated with a
+            key in the cache, or None if not found
+
+        Args:
+            key: Key for which the value is requested
+
+        Returns:
+            The value associated with the key, or None if not found
+        """
         if key in self.cache_data:
-            return self.cached_data[key]
+            return self.cache_data[key]
         return None
