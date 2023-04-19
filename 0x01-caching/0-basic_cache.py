@@ -9,6 +9,12 @@ class BasicCache(BaseCaching):
     """caching system that inherits from BaseCaching.
     """
 
+    def __init__(self):
+        """initilization class instance
+        """
+        super().__init__()
+        self.cache_data = {}
+
     def put(self, key, item):
         """adding a key/value pair to the cache
         """
@@ -21,5 +27,4 @@ class BasicCache(BaseCaching):
         """
         if key in self.cache_data:
             return self.cache_data[key]
-        else:
-            return None
+        return None
