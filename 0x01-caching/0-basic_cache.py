@@ -4,6 +4,7 @@ Basic Caching
 """
 from base_caching import BaseCaching
 
+
 class BasicCache(BaseCaching):
     """caching system that inherits from BaseCaching.
     """
@@ -22,5 +23,3 @@ class BasicCache(BaseCaching):
             return self.cache_data[key]
         else:
             return None
-
-
