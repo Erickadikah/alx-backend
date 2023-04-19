@@ -4,7 +4,7 @@ from base_caching import BaseCaching
 
 
 class LRUCache(BaseCaching):
-    """Class LRU cache keeps track of the oder in which items ara
+    """Class LRU cache keeps track of the oder in which items are
         accesed
     """
 
@@ -30,6 +30,9 @@ class LRUCache(BaseCaching):
         self.data.append(key)
 
     def get(self, key):
+        """key is None or if the key doesn’t exist 
+            in self.cache_data, return None.
+        """
         if key in self.cache_data:
             self.data.remove(key)
             self.data.append(key)
