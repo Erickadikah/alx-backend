@@ -28,7 +28,7 @@ class MRUCache(BaseCaching):
             self.data.remove(key)
         else:
             if len(self.cache_data) >= self.MAX_ITEMS:
-                mru_key = self.data.pop(3)
+                mru_key = self.data.pop(0)
                 del self.cache_data[mru_key]
                 print("DISCARD: {}".format(mru_key))
 
@@ -40,9 +40,9 @@ class MRUCache(BaseCaching):
             key is None or if the key doesn’t exist in
             self.cache_data, return None
         """
-        if key in self.cache_data:
-            self.data.remove(key)
-            self.data.append(key)
-            return self.cache_data[key]
-        else:
+        if key:
+            if key in self.cache_data:
+                self.data.remove(key)
+                self.data.append(key)
+                return self.cache_data[key]
             return None
