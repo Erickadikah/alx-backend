@@ -21,19 +21,22 @@ class MRUCache(BaseCaching):
         """Most Recent Used deletes the least recent used data
            which is stored at the begining of the array
            then pop() is performed on the data key and its key is deleted
+            Args:
+                key(str): key of the item to add
+                item: item to add
+        Returns: None
         """
-        if key is None or item is None:
-            return
-        if key in self.cache_data:
-            self.data.remove(key)
+        if key and item:
+            self.cache_data[key] = item
+        if key not in  self.data:
+            self.data.append(key)
         else:
-            if len(self.cache_data) >= self.MAX_ITEMS:
-                mru_key = self.data.pop(0)
-                del self.cache_data[mru_key]
-                print("DISCARD: {}".format(mru_key))
-
-        self.cache_data[key] = item
-        self.data.append(key)
+            self.data.remove(key)
+            self.data.append(key)
+        if len(self.data) > BaseCaching.MAX_ITEMS:
+            mru = self.data.pop(-2)
+            del self.cache_data[mru]
+            print("DISCARD: {}".format(mru))
 
     def get(self, key):
         """return the value in self.cache_data linked to key
