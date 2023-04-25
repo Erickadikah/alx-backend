@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""
+"""Get locale from request
 """
 
-import  datetime
 from babel import dates
 from flask import request
 from flask import Flask, render_template
@@ -12,7 +11,8 @@ app = Flask(__name__)
 babel = Babel(app)
 @app.route('/', strict_slashes=False)
 def language_conf() -> str:
-    """
+    """get_locale function with the 
+        babel.localeselector decorator
     """
     return render_template('2-index.html')
 
