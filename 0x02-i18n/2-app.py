@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Get locale from request
+    get_locale function with the babel.localeselector
 """
 
 from babel import dates
