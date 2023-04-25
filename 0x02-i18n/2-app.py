@@ -3,9 +3,8 @@
     get_locale function with the babel.localeselector
 """
 
-from babel import dates
-from flask import request
-from flask import Flask, render_template
+
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 app = Flask(__name__)
