@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Get locale from request
+"""Basic flask app Module
+    Get locale from request
     get_locale function with the babel.localeselector
 """
 
@@ -40,7 +41,6 @@ class Config(object):
     LANGUAGES = ["en", "fr"]
 
 
-# @babel.localeselector
 def get_local() -> str:
     """babel.localeselector decorator. Uses
         request.accept_languages to

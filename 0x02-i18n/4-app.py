@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""path ay implementation
+"""Basic flask app Module
+    path ay implementation
     passing the locale=fr
     http://127.0.0.1:5000/?locale=fr
     displays in french

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Function to parametize template
+"""Basic flask app Module
+    Function to parametize template
     IDs: home_title
     home_header (_): to mark translation
 """
