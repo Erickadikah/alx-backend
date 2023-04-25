@@ -20,7 +20,6 @@ class Config(object):
     """Babel instance to configure available
         and a selector
         Languages ["en", "fr"]
-        @babel.localeselector
         localeselector decorator: 
             nvoked for each request to select a 
             language translation to use for that request
@@ -29,6 +28,8 @@ class Config(object):
     BABEL_DEFAULT_TIMEZONE = "UTC"
     LANGUAGES = ["en", "fr"]
 
+
+@babel.localeselector
 def get_local():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
