@@ -9,19 +9,22 @@ from flask_babel import Babel
 
 app = Flask(__name__)
 babel = Babel(app)
+
+
 @app.route('/', strict_slashes=False)
 def language_conf() -> str:
-    """get_locale function with the 
+    """get_locale function with the
         babel.localeselector decorator
     """
     return render_template('2-index.html')
+
 
 class Config(object):
     """Babel instance to configure available
         and a selector
         Languages ["en", "fr"]
-        localeselector decorator: 
-            nvoked for each request to select a 
+        localeselector decorator:
+            nvoked for each request to select a
             language translation to use for that request
     """
     BABEL_DEFAULT_LOCALE = "en"
@@ -31,8 +34,8 @@ class Config(object):
 
 @babel.localeselector
 def get_local():
-    """babel.localeselector decorator. Uses 
-        request.accept_languages to 
+    """babel.localeselector decorator. Uses
+        request.accept_languages to
         determine the best match with our supported languages.
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
