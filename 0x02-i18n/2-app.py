@@ -31,6 +31,10 @@ class Config(object):
 
 @babel.localeselector
 def get_local():
+    """babel.localeselector decorator. Uses 
+        request.accept_languages to 
+        determine the best match with our supported languages.
+    """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
