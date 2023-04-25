@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""
+"""path ay implementation
+    passing the locale=fr
+    http://127.0.0.1:5000/?locale=fr
+    displays in french
 """
 
 
@@ -13,7 +16,7 @@ babel = Babel(app)
 
 @app.route('/', strict_slashes=False)
 def Home() -> str:
-    """
+    """Home Route renders 3-index.html
     """
     return render_template('3-index.html')
 
@@ -23,8 +26,8 @@ class Config(object):
         and a selector
         Languages ["en", "fr"]
         @babel.localeselector()
-        localeselector decorator: 
-            invoked for each request to select a 
+        localeselector decorator:
+            invoked for each request to select a
             language translation to use for that request
     """
     LANGUAGES = ["en", "fr"]
@@ -34,9 +37,13 @@ class Config(object):
 
 app.config.from_object(Config)
 
-@babel.localeselector
+# @babel.localeselector
+
+
 def get_local() -> str:
-    """
+    """param: request if
+        value: support locale
+        Return: fr
     """
     if request.args.get('locale'):
         lang = request.args.get('locale')
