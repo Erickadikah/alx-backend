@@ -6,6 +6,7 @@ The back-end is implemented in Python using the Flask framework. The back-end is
 * Serving the API
 * Pagination
 * Caching
+* i18n
 
 # Pagination
 
