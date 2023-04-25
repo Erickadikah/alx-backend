@@ -3,26 +3,28 @@
 """
 
 
-
 from flask import request
 from flask import Flask, render_template
 from flask_babel import Babel
 
 app = Flask(__name__)
 babel = Babel(app)
+
+
 @app.route('/', strict_slashes=False)
-def language_conf() -> str:
+def Home() -> str:
     """Home Route render_template:
         3-index.htm
     """
     return render_template('3-index.html')
 
+
 class Config(object):
     """Babel instance to configure available
         and a selector
         Languages ["en", "fr"]
-        localeselector decorator: 
-            invoked for each request to select a 
+        localeselector decorator:
+            invoked for each request to select a
             language translation to use for that request
     """
     LANGUAGES = ["en", "fr"]
@@ -30,7 +32,7 @@ class Config(object):
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-@babel.localeselector
+# @babel.localeselector
 def get_local():
     """request.accept_languages
         best match : LANGUAGES
