@@ -39,7 +39,7 @@ class Config(object):
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
     LANGUAGES = ["en", "fr"]
-    
+
     @staticmethod
     def get_locale():
         if g.get('lang_code', None) is not None:
@@ -47,7 +47,8 @@ class Config(object):
         user = g.get('user', None)
         if user is not None:
             return user.locale
-        accept_languages = request.accept_languages.best_match(Config.LANGUAGES)
+        accept_languages = request.accept_languages.best_match(
+            Config.LANGUAGES)
         return accept_languages
 
 
@@ -56,7 +57,8 @@ def get_local() -> str:
     Tries to get the language from the following sources in order:
     1. URL parameters (e.g. ?locale=en)
     2. User settings (e.g. g.user['locale'])
-    3. Request header (e.g. request.accept_languages.best_match(app.config['LANGUAGES']))
+    3. Request header (e.g.
+    request.accept_languages.best_match(app.config['LANGUAGES']))
     4. Default locale (e.g. app.config['BABEL_DEFAULT_LOCALE'])
 
     Returns:
@@ -66,17 +68,19 @@ def get_local() -> str:
     3. Check request header
     4. Fallback to default locale
     """
-    if request.args.get('locale') and request.args.get('locale') in app.config['LANGUAGES']:
+    if request.args.get('locale') and request.args.get(
+            'locale') in app.config['LANGUAGES']:
         return request.args.get('locale')
-    
+
     if g.user and g.user.get('locale') in app.config['LANGUAGES']:
         return g.user.get('locale')
-    
+
     language = request.accept_languages.best_match(app.config['LANGUAGES'])
     if language and language in app.config['LANGUAGES']:
         return language
-    
+
     return app.config['BABEL_DEFAULT_LOCALE']
+
 
 def get_user() -> dict:
     """get_user function to mock a database
