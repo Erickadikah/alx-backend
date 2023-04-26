@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
-"""Basic flask app Module
-    path ay implementation
-    passing the locale=fr
-    http://127.0.0.1:5000/?locale=fr
-    displays in french
+"""
+Basic Flask app module with i18n support
 """
 
 
@@ -15,44 +12,38 @@ app = Flask(__name__, instance_relative_config=True)
 babel = Babel(app)
 
 
-@app.route('/', strict_slashes=False)
-def Home() -> str:
-    """Home Route renders 3-index.html
+class Config:
     """
-    return render_template('3-index.html')
-
-
-class Config(object):
-    """Babel instance to configure available
-        and a selector
-        Languages ["en", "fr"]
-        @babel.localeselector()
-        localeselector decorator:
-            invoked for each request to select a
-            language translation to use for that request
+    Configuration class for Babel extension
     """
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = "UTC"
+    LANGUAGES = ['en', 'fr']
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
 app.config.from_object(Config)
 
-# @babel.localeselector
 
-
-def get_local() -> str:
-    """param: request if
-        value: support locale
-        Return: fr
+@babel.localeselector
+def get_locale() -> str:
+    """
+    Returns the user's preferred locale based on the query string of the
+    HTTP request or the user's browser preferences.
     """
     if request.args.get('locale'):
         lang = request.args.get('locale')
         if lang in app.config['LANGUAGES']:
             return lang
-    else:
-        return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-if __name__ == ('__main__'):
-    app.run()
+@app.route('/', strict_slashes=False)
+def home() -> str:
+    """
+    Renders the index template
+    """
+    return render_template('3-index.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
