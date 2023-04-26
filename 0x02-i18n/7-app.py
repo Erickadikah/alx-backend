@@ -6,8 +6,10 @@
 
 
 from collections import UserDict
+from datetime import timezone
 from flask import Flask, g, render_template, request
 from flask_babel import Babel
+import pytz
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -91,6 +93,22 @@ def before_request():
         global on flask.g.user
     """
     g.user = get_user()
+
+
+# @babel.timezoneselector
+def get_timezone() -> str:
+    """Returs users refered Time zone based on the
+        Sring of HTTP request or the user's Browser preferences.
+    """
+    if request.args('timezone'):
+        tz = request.args.get('timezone')
+        try:
+            timezone(tz)
+            return tz
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    # Fall back to UTC if timezone is not set or is invalid
+    return 'UTC'
 
 
 @app.route('/', strict_slashes=False)
