@@ -26,7 +26,6 @@ npm install
 [Redis client interface](https://intranet.alxswe.com/rltoken/1rq3ral-3C5O1t67dbGcWg)
 
 [Kue](https://intranet.alxswe.com/rltoken/yTC3Ci2IV2US24xJsBfMgQ)
-
 ## Tasks
 
 ### [0. Start Redis server]
@@ -35,4 +34,33 @@ npm install
 * Run a Redis server instance on port 6379
 * In a file named 0-redis_server, write the command used to run the Redis server
 
+### [1. Node Redis Client]
 
+* Install node_redis using npm
+* In a file named 1-redis_client.js, copy the code from the tutorial
+* Add a new function named setNewSchool that takes in a string argument schoolName and a string argument value and creates a new key schoolName with the value set to value
+* Add a new function named displaySchoolValue that takes in a string argument schoolName and prints the value of that key in the following format: The value of schoolName is VALUE
+
+### [2. Node Redis client and basic operations]
+
+### [3. Node Redis client and async operations]
+
+### [4. Node Redis client and advanced operations]
+
+### [5. Node Redis client publisher and subscriber]
+
+### [6. Create the Job creator]
+
+### [7. Create the Job processor]
+
+### [8. Track progress and errors with Kue: Create the Job creator]
+
+### [9. Track progress and errors with Kue: Create the Job processor]
+
+### [10. Writing the job creation function]
+
+### [11. Writing the test for job creation]
+
+### [12. In stock?]
+
+### [13. Can I have a seat?]
